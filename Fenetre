@@ -1,0 +1,49 @@
+from tkinter import *
+from Manage_rep import Creer_repos
+
+
+f=Tk()
+f.title("Et vous que faites vous quand vous vous ennuyez ? lol")
+f.geometry("700x800")
+f['bg']='lightblue'
+f.resizable(width=False,height=False)
+label=Label(f,text="Creation Repos",bg='orange',font=("verdana",7))
+label.pack()
+
+# Champs pour le nom, la description et la confidentialité du repository
+lnom=Label(f,text="Nom du Repository",bg='lightblue',font=("verdana",10))
+lnom.pack(pady=10)
+enom=Entry(f,textvariable="nom")
+enom.pack(pady=5)
+
+ldesc=Label(f,text="Description du Repository",bg='lightblue',font=("verdana",10))
+ldesc.pack(pady=10)
+edesc=Entry(f,textvariable="desc")
+edesc.pack(pady=5)
+
+lpriv=Label(f,text="Repository Privé (oui/non)",bg='lightblue',font=("verdana",10))
+lpriv.pack(pady=10)
+epriv=Entry(f,textvariable="priv")
+epriv.pack(pady=5)
+
+# Fonction pour créer le repository en utilisant les valeurs des champs
+def CRep():
+    
+    name=enom.get()
+    description=edesc.get()
+    priv=epriv.get()
+    print(name,description,priv)
+    CC=Creer_repos(name,description,priv)
+    if CC==True:
+        success_label=Label(f,text="Repository créé avec succès!",bg='lightgreen',font=("verdana",10))
+        success_label.pack(pady=10)
+    else:
+        error_label=Label(f,text=f"Erreur lors de la création du repository: {CC}",bg='red',font=("verdana",10))
+        error_label.pack(pady=10)    
+        
+    
+    
+
+button=Button(f,text="Créer le Repository",bg='orange',font=("verdana",10),command=CRep)
+button.pack(pady=20)
+f.mainloop() 
